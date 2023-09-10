@@ -1,0 +1,23 @@
+# intellij
+.idea/*
+
+# NPM Cache files
+.npm
+
+# nodejs
+node_modules/
+
+# VS Code
+.vscode/*
+
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# macOS
+.DS_Store
+
+# jest
+coverage

@@ -149,6 +149,28 @@ class Trie {
       }
     }
   }
+
+  longestPrefixOf(query) {
+    const length = this.#search(this.#root, query, 0, 0);
+    return query.substring(0, length);
+  }
+
+  #search(node, query, d, length) {
+    if (node === undefined) {
+      return length;
+    }
+
+    if (node.value !== undefined) {
+      length = d;
+    }
+
+    if (d === query.length) {
+      return length;
+    }
+
+    const c = query.charCodeAt(d);
+    return this.#search(node.next[c], query, d + 1, length);
+  }
 }
 
 module.exports = {

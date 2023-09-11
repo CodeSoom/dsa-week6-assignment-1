@@ -30,6 +30,9 @@ class Trie {
 
   delete(key) {
   }
+
+  longestPrefixOf(query) {
+  }
 }
 
 describe('Trie', () => {
@@ -120,5 +123,15 @@ describe('Trie', () => {
     trie.delete('apple');
 
     expect(trie.get('apple')).toBeUndefined();
+  });
+
+  test('longestPrefixOf는 매칭되는 최소 접두어를 반환한다', () => {
+    const trie = new Trie();
+
+    words.forEach(([key, value]) => {
+      trie.put(key, value);
+    });
+
+    expect(trie.longestPrefixOf('appl')).toBe('app');
   });
 });

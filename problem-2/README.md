@@ -32,6 +32,7 @@ trie.keys()
 trie.keysWithPrefix('band')
 trie.keysThatMatch('appe..')
 trie.delete('apple')
+trie.longestPrefixOf('appl')
 ```
 
 3. 앞의 과정을 생각하면서 각 연산을 코드로 구현해 주세요.

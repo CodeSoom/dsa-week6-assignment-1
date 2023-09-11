@@ -54,7 +54,7 @@ class Trie {
       return 0;
     }
 
-    let count = node.value === undefined ? 1 : 0;
+    let count = node.value !== undefined ? 1 : 0;
 
     for (let i = 0; i < R; i++) {
       count += this.#size(node.next[i]);

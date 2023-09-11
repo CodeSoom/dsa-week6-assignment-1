@@ -72,7 +72,7 @@ describe('Trie', () => {
       trie.put(key, value);
     });
 
-    expect(trie.size()).toBe(28);
+    expect(trie.size()).toBe(16);
   });
 
   test('keys는 모든 키 목록을 반환한다', () => {

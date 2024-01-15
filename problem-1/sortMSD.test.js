@@ -34,6 +34,37 @@ const CUTOFF = 15;
 const charAt = (s, d) => (d < s.length ? s.charCodeAt(d) : -1);
 
 const sort = (words, aux, lo, hi, d) => {
+  // 정렬 범위
+  if (hi <= lo + CUTOFF) {
+    insertionSort(words, lo, hi, d);
+    return;
+  }
+
+  const count = new Array(R + 2).fill(0);
+
+  // 빈도수
+  for (let i = lo; i <= hi; i++) {
+    count[charAt(words[i], d) + 2]++;
+  }
+
+  // 시작 인덱스
+  for (let i = 0; i < R + 1; i++) {
+    count[i + 1] += count[i];
+  }
+
+  // 임시 배열 분해
+  for (let i = lo; i <= hi; i++) {
+    aux[count[charAt(words[i], d) + 1]++] = words[i];
+  }
+
+  // 원본 수정
+  for (let i = lo; i <= hi; i++) {
+    words[i] = aux[i - lo];
+  }
+
+  for (let i = 0; i < R; i++) {
+    sort(words, aux, lo + count[i], lo + count[i + 1] - 1, d + 1);
+  }
 };
 
 const sortMSD = (words) => {

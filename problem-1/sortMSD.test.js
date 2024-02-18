@@ -28,12 +28,43 @@ const insertionSort = (list, lo, hi, d) => {
   }
 };
 
-const R = 256;
+const rangeOfChars = 256;
 const CUTOFF = 15;
 
 const charAt = (s, d) => (d < s.length ? s.charCodeAt(d) : -1);
 
-const sort = (words, aux, lo, hi, d) => {
+const sort = (words, temp, low, high, d) => {
+  if (high <= low + CUTOFF) {
+    insertionSort(words, low, high, d);
+    return;
+  }
+
+  // todo: 특정 문자의 등장 빈도를 계산하기 위한 배열 생성 (값은 모두 0으로)
+  const frequencyOfChars = Array.from({ length: rangeOfChars + 2 }, () => 0);
+
+  // todo: 해당 문자의 ASCII 값으로 등장 빈도수 계산하기
+  for (let i = low; i <= high; i++) {
+    frequencyOfChars[charAt(words[i], d) + 2]++;
+  }
+
+  // todo: 배열 안의 값을 누적하면서 각 문자가 처음 등장하는 인덱스 구하기
+  for (let i = 0; i < rangeOfChars + 1; i++) {
+    frequencyOfChars[i + 1] += frequencyOfChars[i];
+  }
+
+  // todo: 임시 배열에 문자열 정렬하기
+  for (let i = low; i <= high; i++) {
+    temp[frequencyOfChars[charAt(words[i], d) + 1]++] = words[i];
+  }
+
+  // todo: 임시 배열에 정렬한대로 원본 배열도 정렬하기
+  for (let i = low; i <= high; i++) {
+    words[i] = temp[i - low];
+  }
+
+  for (let i = 0; i < rangeOfChars; i++) {
+    sort(words, temp, low + frequencyOfChars[i], low + frequencyOfChars[i + 1] - 1, d + 1);
+  }
 };
 
 const sortMSD = (words) => {

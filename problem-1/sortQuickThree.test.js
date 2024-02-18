@@ -4,7 +4,39 @@ const exchange = (words, i, j) => {
   [words[i], words[j]] = [words[j], words[i]];
 };
 
-const sortQuickThree = (words, lo = 0, hi = words.length - 1, d = 0) => {
+const sortQuickThree = (words, low = 0, high = words.length - 1, d = 0) => {
+  if (high <= low) {
+    return;
+  }
+
+  const pivot = charAt(words[low], d);
+
+  let lt = low;
+  let gt = high;
+  let i = low + 1;
+
+  while (i <= gt) {
+    const t = charAt(words[i], d);
+
+    if (t < pivot) { // todo: 기준 문자보다 작으면 LT 와 교환하고, LT 와 i 를 한 칸씩 이동하기
+      exchange(words, lt++, i++);
+    } else if (t > pivot) { // todo: 기준 문자보다 크다면 GT 와 교환하고, GT 를 앞으로 한 칸 이동하기
+      exchange(words, i, gt--);
+    } else {
+      i++; // todo: 기준 문자와 같다면 i 만 이동하기
+    }
+  }
+
+  // todo: 기준 문자보다 작은 그룹 -> 맨 처음 문자를 기준으로 다시 정렬하기
+  sortQuickThree(words, low, lt - 1, d);
+
+  // todo: 기준 문자와 같은 그룹 -> 다음 문자를 기준으로 다시 정렬하기
+  if (pivot >= 0) {
+    sortQuickThree(words, lt, gt, d + 1);
+  }
+
+  // todo: 기준 문자보다 큰 그룹 -> 맨 처음 문자를 기준으로 다시 정렬하기
+  sortQuickThree(words, gt + 1, high, d);
 };
 
 test('sortQuickThree는 문자열을 정렬한다.', () => {

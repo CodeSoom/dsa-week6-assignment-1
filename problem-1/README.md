@@ -62,6 +62,14 @@ CAT
   데이터를 넣었을 때 실제로 실행되는 과정을 그림으로 그려주세요.
 - 3-3 앞의 과정을 생각하면서 코드를 직접 구현해 주세요.
 
+![3way-quick-01.png](3way-quick-01.png)
+
+![3way-quick-02.png](3way-quick-02.png)
+
+![3way-quick-03.png](3way-quick-03.png)
+
+![3way-quick-04.png](3way-quick-04.png)
+
 ```
 BOAT
 CAR
